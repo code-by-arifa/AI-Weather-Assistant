@@ -1,0 +1,12 @@
+# dependencies
+node_modules/
+
+# environment variables (NEVER commit secrets)
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor files
+.vscode/

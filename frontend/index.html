@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Weather Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="app-header">
+    <h1>🌤️ AI Weather Assistant</h1>
+    <p class="tagline">Search a city and get an AI-powered weather explanation</p>
+  </header>
+
+  <main>
+
+    <!-- ============ SEARCH SECTION ============ -->
+    <section class="search-section" aria-label="City search">
+      <form id="search-form" class="search-form">
+        <label for="city-input" class="visually-hidden">City name</label>
+        <input
+          type="text"
+          id="city-input"
+          name="city"
+          placeholder="Enter a city name (e.g. Lahore)"
+          maxlength="80"
+          autocomplete="off"
+          required
+        />
+        <button type="submit" id="search-btn">Search</button>
+        <button type="button" id="location-btn">📍 Use My Location</button>
+      </form>
+
+      <!-- Shown only when Open-Meteo returns multiple matching cities -->
+      <div id="location-select-container" class="location-select-container hidden"></div>
+    </section>
+
+    <!-- ============ GLOBAL LOADING / ERROR ============ -->
+    <div id="loading-indicator" class="loading-indicator hidden">Loading weather data…</div>
+    <div id="error-message" class="error-message hidden" role="alert"></div>
+
+    <!-- ============ DASHBOARD (hidden until data loads) ============ -->
+    <div id="dashboard" class="dashboard hidden">
+
+      <!-- CURRENT WEATHER -->
+      <section class="card current-weather" aria-label="Current weather">
+        <h2 id="location-name">--</h2>
+        <div class="current-main">
+          <span id="current-icon" class="weather-icon" aria-hidden="true">☀️</span>
+          <span id="current-temp" class="current-temp">--°C</span>
+        </div>
+        <p id="current-condition" class="condition-text">--</p>
+        <div class="current-details">
+          <p>Feels like: <span id="feels-like">--°C</span></p>
+          <p>Humidity: <span id="humidity">--%</span></p>
+          <p>Wind: <span id="wind-speed">-- km/h</span></p>
+          <p>Precipitation: <span id="precipitation">-- mm</span></p>
+        </div>
+        <p class="last-updated">Updated: <span id="last-updated">--</span></p>
+      </section>
+
+      <!-- HOURLY FORECAST -->
+      <section class="card hourly-forecast" aria-label="Hourly forecast">
+        <h3>Today's Hourly Forecast</h3>
+        <div id="hourly-scroll" class="hourly-scroll"></div>
+      </section>
+
+      <!-- SEVEN DAY FORECAST -->
+      <section class="card daily-forecast" aria-label="Seven day forecast">
+        <h3>7-Day Forecast</h3>
+        <div id="daily-list" class="daily-list"></div>
+      </section>
+
+      <!-- CHARTS -->
+      <section class="card chart-card" aria-label="Temperature chart">
+        <h3>Temperature (°C)</h3>
+        <canvas id="temperature-chart"></canvas>
+      </section>
+
+      <section class="card chart-card" aria-label="Precipitation probability chart">
+        <h3>Precipitation Probability (%)</h3>
+        <canvas id="precipitation-chart"></canvas>
+      </section>
+
+      <section class="card chart-card" aria-label="Wind speed chart">
+        <h3>Wind Speed (km/h)</h3>
+        <canvas id="wind-chart"></canvas>
+      </section>
+
+      <!-- AI ASSISTANT -->
+      <section class="card ai-assistant" aria-label="AI weather assistant">
+        <h3>🤖 Ask the AI Weather Assistant</h3>
+
+        <div class="predefined-questions" id="predefined-questions">
+          <button class="question-chip" data-question="Should I carry an umbrella today?">Should I carry an umbrella?</button>
+          <button class="question-chip" data-question="What should I wear today?">What should I wear today?</button>
+          <button class="question-chip" data-question="Is today suitable for outdoor activities?">Outdoor activities today?</button>
+          <button class="question-chip" data-question="Will it be windy today?">Will it be windy today?</button>
+          <button class="question-chip" data-question="Will tomorrow be warmer than today?">Warmer tomorrow?</button>
+        </div>
+
+        <form id="ai-form" class="ai-form">
+          <label for="ai-question" class="visually-hidden">Ask a weather question</label>
+          <input
+            type="text"
+            id="ai-question"
+            placeholder="Or type your own weather question…"
+            maxlength="200"
+          />
+          <button type="submit" id="ai-submit-btn">Ask</button>
+        </form>
+
+        <div id="ai-loading" class="ai-loading hidden">Thinking…</div>
+        <div id="ai-error" class="ai-error hidden"></div>
+        <div id="ai-answer" class="ai-answer hidden"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Weather data by Open-Meteo · AI explanations by Gemini</p>
+  </footer>
+
+  <!-- Chart.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

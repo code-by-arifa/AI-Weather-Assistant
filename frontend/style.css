@@ -1,0 +1,235 @@
+:root {
+  --primary: #2b6cb0;
+  --primary-dark: #1a4971;
+  --accent: #f6ad55;
+  --bg: #f0f5fa;
+  --card-bg: #ffffff;
+  --text: #1a202c;
+  --text-light: #4a5568;
+  --error: #c53030;
+  --error-bg: #fff5f5;
+  --radius: 14px;
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg), #ffffff);
+  color: var(--text);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.hidden { display: none !important; }
+
+/* ---------- Header ---------- */
+.app-header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.app-header h1 { margin: 0 0 0.3rem; font-size: 1.8rem; }
+.tagline { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* ---------- Search ---------- */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+#city-input {
+  flex: 1 1 240px;
+  padding: 0.7rem 1rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.search-form button {
+  padding: 0.7rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.search-form button:hover { background: var(--primary-dark); }
+#location-btn { background: var(--accent); color: #333; }
+#location-btn:hover { background: #dd8a2e; }
+
+.location-select-container {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+.location-option {
+  background: var(--card-bg);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+.location-option:hover { border-color: var(--primary); }
+.location-option strong { display: block; }
+.location-option span { color: var(--text-light); font-size: 0.85rem; }
+
+/* ---------- Loading / errors ---------- */
+.loading-indicator, .ai-loading {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+.error-message, .ai-error {
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid #fed7d7;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+}
+
+/* ---------- Dashboard grid ---------- */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.3rem;
+}
+.current-weather, .ai-assistant { grid-column: 1 / -1; }
+
+/* ---------- Current weather ---------- */
+.current-weather h2 { margin: 0 0 0.5rem; }
+.current-main {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.weather-icon { font-size: 3rem; }
+.current-temp { font-size: 2.6rem; font-weight: 700; }
+.condition-text { color: var(--text-light); margin: 0.2rem 0 1rem; }
+.current-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.4rem 1rem;
+}
+.current-details p { margin: 0.2rem 0; }
+.last-updated { color: var(--text-light); font-size: 0.85rem; margin-top: 0.8rem; }
+
+/* ---------- Hourly forecast ---------- */
+.hourly-scroll {
+  display: flex;
+  gap: 0.9rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+.hourly-item {
+  flex: 0 0 auto;
+  text-align: center;
+  min-width: 70px;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 0.6rem 0.5rem;
+}
+.hourly-item .h-time { font-size: 0.8rem; color: var(--text-light); }
+.hourly-item .h-icon { font-size: 1.5rem; display: block; margin: 0.2rem 0; }
+.hourly-item .h-temp { font-weight: 600; }
+.hourly-item .h-precip { font-size: 0.75rem; color: var(--primary); }
+
+/* ---------- Daily forecast ---------- */
+.daily-list { display: grid; gap: 0.6rem; }
+.daily-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+}
+.daily-item .d-day { font-weight: 600; min-width: 90px; }
+.daily-item .d-icon { font-size: 1.4rem; }
+.daily-item .d-precip { color: var(--primary); font-size: 0.85rem; }
+
+/* ---------- Charts ---------- */
+.chart-card canvas { width: 100% !important; max-height: 260px; }
+
+/* ---------- AI assistant ---------- */
+.predefined-questions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.question-chip {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  background: white;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.question-chip:hover { background: var(--primary); color: white; }
+.ai-form { display: flex; gap: 0.6rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
+#ai-question {
+  flex: 1 1 240px;
+  padding: 0.65rem 1rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+}
+#ai-submit-btn {
+  padding: 0.65rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+}
+.ai-answer {
+  background: var(--bg);
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  line-height: 1.5;
+}
+
+/* ---------- Footer ---------- */
+.app-footer {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.8rem;
+  padding: 1.5rem 1rem;
+}
+
+/* ---------- Responsive (FR-68 to FR-72) ---------- */
+@media (max-width: 600px) {
+  .app-header h1 { font-size: 1.4rem; }
+  .current-temp { font-size: 2rem; }
+  .search-form { flex-direction: column; }
+  .search-form input, .search-form button { width: 100%; }
+}
