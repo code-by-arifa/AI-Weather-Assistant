@@ -22,7 +22,6 @@ async function generateAnswer(prompt) {
     if (!text) throw new Error("EMPTY_RESPONSE");
     return text.trim();
   } catch (err) {
-    console.error("REAL GEMINI ERROR:", err.message);
     throw new Error("GEMINI_REQUEST_FAILED");
 }
 }

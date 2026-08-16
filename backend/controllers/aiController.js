@@ -15,7 +15,6 @@ async function handleAskAI(req, res) {
     const answer = await generateAnswer(prompt);
     return res.status(200).json({ success: true, answer });
   } catch (err) {
-    console.error("CONTROLLER CAUGHT ERROR:", err.message);
     return res.status(503).json({
       success: false,
       error: "AI assistant is temporarily unavailable."
