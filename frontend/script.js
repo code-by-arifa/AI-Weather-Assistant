@@ -5,7 +5,7 @@ const WEATHER_API = "https://api.open-meteo.com/v1/forecast";
 
 // Replace this with your deployed backend URL when you deploy.
 // For local development, this points to your local backend.
-const BACKEND_URL = "http://localhost:5000";
+const BACKEND_URL = "https://ai-weather-assistant-backend.onrender.com";
 
 const LAST_CITY_KEY = "aiWeatherAssistant_lastCity";
 const LAST_CITY_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
