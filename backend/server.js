@@ -13,7 +13,7 @@ const allowedOrigins = [
   "http://127.0.0.1:5500",
   process.env.FRONTEND_URL   // set this in Render's environment variables
 ].filter(Boolean);
-
+console.log("ALLOWED ORIGINS:", allowedOrigins);
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like curl/Postman) during development.
